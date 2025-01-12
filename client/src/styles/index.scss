@@ -13,6 +13,12 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .main {
   flex: 1;
 }
@@ -42,9 +48,14 @@ body {
   padding: 5px 20px;
 }
 
-.main-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.main-nav {
+  a,
+  button {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 16px;
+    cursor: pointer;
+  }
 }
 
 .main-nav a.router-link-exact-active {
@@ -54,6 +65,8 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  background: transparent;
+  border: none;
 }
 
 .main-nav-item:hover {
@@ -71,7 +84,7 @@ body {
 }
 
 .hero {
-  background-image: url('../assets/images/bank-tree.jpeg');
+  background-image: url("../assets/images/bank-tree.jpeg");
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -163,6 +176,10 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 }
 
 .sign-in-content {
@@ -251,12 +268,31 @@ body {
   flex: 1;
 }
 
-.edit-button {
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  
+  .edit-fields, .edit-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+  }
+  .edit-fields {
+    input {
+      padding: 5px;
+      font-size: 1.2rem;
+    }
+  }
+}
+.edit-button,
+.cancel-button {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
   font-weight: bold;
   padding: 10px;
+  min-width: 90px;
 }
 
 .header {

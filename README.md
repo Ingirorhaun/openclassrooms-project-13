@@ -1,6 +1,6 @@
 # Project #10 - Argent Bank API
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This codebase contains the code needed to run the backend and frontend for Argent Bank.
 
 ## Getting Started
 
@@ -58,6 +58,9 @@ Once you run the `populate-db` script, you should have two users in your databas
 - Last Name: `Rogers`,
 - Email: `steve@rogers.com`,
 - Password: `password456`
+
+## Front-end installation
+Please refer to the instructions [here](https://github.com/Ingirorhaun/openclassrooms-project-13/blob/master/client/README.md).
 
 ## API Documentation
 

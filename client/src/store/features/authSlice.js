@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isAuthenticated: false,
+    justLoggedOut: false,
     token: null,
     loading: false,
     error: null,
@@ -32,9 +33,13 @@ const authSlice = createSlice({
             localStorage.removeItem('token');
             state.loading = false;
             state.error = null;
+            state.justLoggedOut = true;
         },
+        resetLogoutFlag: (state) => {
+            state.justLoggedOut = false;
+        }
     },
 });
 
-export const { loginStart, setToken, loginFailure, logout } = authSlice.actions;
+export const { loginStart, setToken, loginFailure, logout, resetLogoutFlag } = authSlice.actions;
 export default authSlice.reducer;

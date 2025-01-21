@@ -4,8 +4,6 @@ const initialState = {
   firstName: '',
   lastName: '',
   email: '',
-  loading: false,
-  error: null,
 };
 
 const userSlice = createSlice({

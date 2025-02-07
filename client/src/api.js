@@ -10,7 +10,8 @@ export async function userLogin(credentials) {
             body: JSON.stringify(credentials),
         });
         if (!response.ok) {
-            throw new Error(response.statusText, response.status);
+            const data = await response.json();
+            throw new Error(data.message, response.status);
         }
         const data = await response.json();
         return data.body;

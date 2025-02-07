@@ -1,0 +1,213 @@
+swagger: '2.0'
+info:
+  title: Bank Argent transactions API documentation
+  description: Contains all available transactions API endpoints
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/transactions/v1
+schemes:
+  - http
+paths:
+  /user/transactions/monthly:
+    get:
+      tags:
+        - Transactions
+      summary: Get this month's transactions
+      description: Return all transactions made in the current month
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+  /user/transactions/{transactionId}:
+    get:
+      tags:
+        - Transactions
+      summary: Find a transaction by ID
+      description: Find a transaction by ID
+      parameters:
+        - name: transactionId
+          type: string
+          in: path
+          description: ID of the transaction to return
+          required: true
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Signup Successfully
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+        - Transactions
+      summary: Update an existing transaction
+      description: Find an existing transaction by ID and update it
+      parameters:
+        - name: transactionId
+          type: string
+          in: path
+          description: ID of the transaction to update
+          required: true
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: Transaction data
+          description: Update an existing transaction
+          schema:
+            $ref: '#/definitions/Transaction'
+          required: true
+      responses:
+        '200':
+          description: Operation successful
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Transactions
+      summary: Delete a transaction
+      description: Find an existing transaction by ID and delete it
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - name: transactionId
+          type: string
+          in: path
+          description: ID of the transaction to delete
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operation successful
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+ 
+definitions:
+  TransactionsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: array
+        items:
+          type: object
+          properties:
+            account:
+              type: string
+            date:
+              type: string
+            description:
+              type: string
+            amount:
+              type: number
+            transactionType:
+              type: string
+            category:
+              type: string
+            notes:
+              type: string
+            balance:
+              type: number
+  TransactionResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          account:
+            type: string
+          date:
+            type: string
+          description:
+            type: string
+          amount:
+            type: number
+          transactionType:
+            type: string
+          category:
+            type: string
+          notes:
+            type: string
+          balance:
+            type: number
+  Transaction:
+    type: object
+    properties:
+      account:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      transactionType:
+        type: string
+      category:
+        type: string
+      notes:
+        type: string
+      balance:
+        type: number

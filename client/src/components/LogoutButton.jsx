@@ -1,13 +1,25 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUserProfile } from "../store/features/userSlice";
+import { logout } from "../store/features/authSlice";
 
 export const LogoutButton = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  return isAuthenticated ? (
-    <Link to="/logout" className="main-nav-item">
-      <i className="fa fa-sign-out"></i>
-      Sign Out
-    </Link>
-  ) : null;
+    const handleLogout = async () => {
+      await Promise.all([
+        dispatch(clearUserProfile()),
+        dispatch(logout())
+      ]);
+      navigate("/");
+    };
+
+    return isAuthenticated ? (
+      <button className="logout-button main-nav-item" onClick={handleLogout}>
+        <i className="fa fa-sign-out"></i>
+        Sign Out
+      </button>
+    ) : null;
 };
